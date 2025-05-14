@@ -1,6 +1,7 @@
 services:
   my_web:
     user: ${MY_UID}:${MY_GID}
+    container_name: my_web
     build:
       context: ./build
       dockerfile: Dockerfile.php
@@ -14,6 +15,7 @@ services:
 
   my_mariadb:
     user: ${MY_UID}:${MY_GID}
+    container_name: my_mariadb
     build:
       context: ./build
       dockerfile: Dockerfile.mariadb
@@ -29,6 +31,7 @@ services:
 
   my_phpMyAdmin:
     image: phpmyadmin
+    container_name: phpmyadmin
     ports:
       - 8081:80
     environment:
@@ -36,6 +39,7 @@ services:
 
   my_node:
     user: ${MY_UID}:${MY_GID}
+    container_name: my_node
     build:
       context: ./build
       dockerfile: Dockerfile.node
