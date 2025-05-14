@@ -5,6 +5,9 @@ import {useState} from 'react';
 function App() {
   const [alunni, setAlunni] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [nome, setNome] = useState("");
+  const [cognome, setCognome] = useState("");
+  const [mostraForm, setMostraForm] = useState(false);
 
   async function caricaAlunni () {
     setLoading(true);
@@ -12,6 +15,13 @@ function App() {
     const data = await response.json();
     setLoading(false);
     setAlunni(data);
+  }
+
+  async function aggiungiStudente() {
+    const response = await fetch("http://localhost:8080/alunni", {method: "POST", 
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({nome: nome, cognome: cognome})})
+    console.log(response);
   }
   
   return (
@@ -31,6 +41,18 @@ function App() {
             )
           }
         </table>)
+      }
+      <br/>
+      <button onClick={() => setMostraForm(!mostraForm)}>aggiungi studente</button>
+      {
+      mostraForm && 
+      <div>
+        <label htmlFor="nome">Nome</label>
+        <input name='nome' id='nome' onChange={(event) => setNome(event.target.value)} /><br/>
+        <label htmlFor="cognome">Cognome</label>
+        <input name='cognome' id='cognome' onChange={(event) => setCognome(event.target.value)}/><br/>
+        <button onClick={aggiungiStudente}>Aggiungi</button>
+      </div>
       }
     </div>
   );
