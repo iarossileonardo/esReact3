@@ -38,7 +38,7 @@ class AlunniController
   {
     $data = json_decode($request->getBody()->getContents(), true);
     $mysqli_connection = new MySQLi('my_mariadb', 'root', 'ciccio', 'scuola');
-    $raw_query = "INSERT INTO alunni (nome, cognome, cf) VALUES ('$data[nome]', '$data[cognome]', '$data[cf]');";
+    $raw_query = "INSERT INTO alunni (nome, cognome) VALUES ('$data[nome]', '$data[cognome]');";
     $result = $mysqli_connection->query($raw_query);
     if ($result && $mysqli_connection->affected_rows > 0) {
       $response->getBody()->write(json_encode(array("message" => "success")));

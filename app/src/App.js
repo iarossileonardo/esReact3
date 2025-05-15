@@ -21,7 +21,13 @@ function App() {
     const response = await fetch("http://localhost:8080/alunni", {method: "POST", 
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({nome: nome, cognome: cognome})})
+    
     console.log(response);
+
+    if (response.ok) {
+      setMostraForm(false);
+      caricaAlunni();
+    }
   }
   
   return (
