@@ -23,7 +23,7 @@ export default function Riga(props) {
     }
 
     async function salvaModifiche() {
-        const response = await fetch(`http://localhost:8080/alunni/${document.getElementsByName("id")[0].value}`, {method: "PUT",
+        const response = await fetch(`http://localhost:8080/alunni/${alunno.id}`, {method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({nome: nome, cognome: cognome})});
         console.log(response);
@@ -36,7 +36,6 @@ export default function Riga(props) {
         mostraModifica ? (
                     <>
                     <td>{alunno.id}
-                        <input name="id" id="id" value={alunno.id} type="hidden" ></input>
                     </td>
                     <td><input name="nome" id="nome" onChange={(event) => setNome(event.target.value)}/></td>
                     <td><input name="cognome" id="cognome" onChange={(event) => setCognome(event.target.value)}/></td>
@@ -49,17 +48,23 @@ export default function Riga(props) {
             
             <td>
                 {
+                !conferma && ( <> {
                 !mostraModifica ? (
                     <>
                         <button onClick={prepFormModifica}>modifica</button>
+                        <button onClick={() => {
+                            props.onMostraModifica();
+                            props.refId(alunno.id);
+                        }}>modifica2</button>
                     </>
                 )
                 :
                 (<>
                     <button onClick={salvaModifiche}>Conferma</button>
                     <button onClick={prepFormModifica}>annulla</button>
-                </>)
+                </>) } </> )
                 }
+
                 {
                     !mostraModifica && (<> {
                     !conferma ? 
