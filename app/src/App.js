@@ -45,7 +45,6 @@ function App() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({nome: nome, cognome: cognome})});
     console.log(response);
-    setMostraModifica(false);
     caricaAlunni();
     toggleModifica();
 }
