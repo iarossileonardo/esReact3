@@ -61,13 +61,14 @@ export default function Riga(props) {
                 </>)
                 }
                 {
+                    !mostraModifica && (<> {
                     !conferma ? 
                     <button onClick={mostraConferma}>cancella</button>
                     :
                     (<>
                     <span>sicuro?</span>
                     <button onClick={() => cancellaAlunno(alunno.id)}>sì</button>
-                    <button onClick={mostraConferma}>no</button></>)
+                    <button onClick={mostraConferma}>no</button></>)}</>)
                 }
             </td>
         </tr>
